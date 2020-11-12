@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition >
+          <!-- **********************************************************************************************************************************************************
+           MAIN CONTENT
+           *********************************************************************************************************************************************************** -->
+      
+       
+       <!--main content start-->
+       <section id="main-content">
+         <section class="wrapper">
+          <div class="col-lg-8 col-lg-offset-2 detailed mt">
+                        <h4 class="mb">Personal Information</h4>
+                        <h:form role="form" class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Tipo documento</label>
+                            <div class="col-lg-6">
+                                <input type="text" disabled="true"  placeholder="#{usuarioSesion.usuLogin.tipoDocumento}" id="addr1" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Numero Documento</label>
+                            <div class="col-lg-6">
+                                <input type="text" disabled="true" placeholder="#{usuarioSesion.usuLogin.documento}" id="addr2" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Nombres</label>
+                            <div class="col-lg-6">
+                                <h:inputText value="#{usuarioSesion.usuLogin.nombres}" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Apellidos</label>
+                            <div class="col-lg-6">
+                                <h:inputText value="#{usuarioSesion.usuLogin.apellidos}" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Email</label>
+                            <div class="col-lg-6">
+                                <input type="text" disabled="true" placeholder="#{usuarioSesion.usuLogin.correo}" id="email" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Clave</label>
+                            <div class="col-lg-6">
+                                <h:inputSecret value="#{usuarioSesion.usuLogin.clave}" class="form-control"/>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <h:commandButton class="btn btn-theme" action="#{usuarioSesion.actualizarMisDatos()}" value="Save"></h:commandButton>
+                            </div>
+                          </div>
+                        </h:form>
+                      </div>
+         </section>
+       </section>
+       <!--main content end-->
+    </ui:composition>
+</html>
+
