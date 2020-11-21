@@ -29,9 +29,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
+
     @Override
-    public Usuario recuperarContrasenia(String correoIn){
+    public Usuario recuperarContrasenia(String correoIn) {
         try {
             Query qt = em.createQuery("SELECT u FROM Usuario u WHERE u.correo = :correoIn ");
             qt.setParameter("correoIn", correoIn);
@@ -39,18 +39,31 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } catch (Exception e) {
             return new Usuario();
         }
-        
+
     }
-    
+
     @Override
-    public Usuario loginUsuario(String correoIn , String claveIn){
+    public Usuario loginUsuario(String correoIn, String claveIn) {
         try {
             Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.correo = :correoIn AND u.clave = :claveIn");
-            q.setParameter("correoIn",correoIn );
-            q.setParameter("claveIn",claveIn );
-            return (Usuario) q.getSingleResult();            
+            q.setParameter("correoIn", correoIn);
+            q.setParameter("claveIn", claveIn);
+            return (Usuario) q.getSingleResult();
         } catch (Exception e) {
-        return  new Usuario();
+            return new Usuario();
+        }
+    }
+
+    @Override
+    public boolean removerUsuario(int id) {
+        boolean retorno = false;
+        try {
+            Query qt = em.createQuery("DELETE FROM Usuario u WHERE u.id = :id");
+            qt.setParameter("id", id);
+            int salida = qt.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return retorno;
         }
     }
 }
