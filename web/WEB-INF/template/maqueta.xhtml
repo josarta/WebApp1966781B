@@ -27,6 +27,7 @@
         <link href="../css/style.css" rel="stylesheet"/>
         <link href="../css/style-responsive.css" rel="stylesheet"/>
         <script src="../lib/chart-master/Chart.js"></script>
+          <link href="../lib/fancybox/jquery.fancybox.css" rel="stylesheet" />
         
           <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </h:head>
@@ -55,6 +56,7 @@
 
          <script src="../lib/jquery/jquery.min.js"></script>
 
+         <script src="../lib/fancybox/jquery.fancybox.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
   <script class="include" type="text/javascript" src="../lib/jquery.dcjqaccordion.2.7.js"></script>
   <script src="../lib/jquery.scrollTo.min.js"></script>
@@ -128,6 +130,11 @@
       var to = $("#" + id).data("to");
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
+    
+     $(function() {
+      //    fancybox
+      jQuery(".fancybox").fancybox();
+    });
   </script>
   
     </h:body>
