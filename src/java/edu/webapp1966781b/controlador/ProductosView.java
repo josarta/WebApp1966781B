@@ -15,6 +15,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -29,6 +31,8 @@ public class ProductosView implements Serializable {
     @EJB
     CategoriaFacadeLocal categoriaFacadeLocal;
     
+    @Inject
+    CategoriasView categoriasView;
     
     
     private ArrayList<Producto> listaProductos = new ArrayList<>();
@@ -49,10 +53,12 @@ public class ProductosView implements Serializable {
         try {
             Categoria cateIn = categoriaFacadeLocal.find(id_categoria);
             productoNuevo.setFkCategoria(cateIn);
+            productoNuevo.setImagenRuta(categoriasView.getRutaImg());
             productoFacadeLocal.create(productoNuevo);
         } catch (Exception e) {
             System.out.println("edu.webapp1966781b.controlador.ProductosView.nuevoProducto() " + e.getMessage());
         }
+         PrimeFaces.current().executeScript("$('#myModal').hide();");      
     }
 
     public ProductosView() {

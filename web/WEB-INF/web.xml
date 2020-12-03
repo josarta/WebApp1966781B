@@ -9,9 +9,17 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>ServletImg</servlet-name>
+        <servlet-class>edu.webapp1966781b.utilidades.ServletImg</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletImg</servlet-name>
+        <url-pattern>/ServletImg</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

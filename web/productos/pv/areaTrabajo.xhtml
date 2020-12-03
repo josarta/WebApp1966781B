@@ -56,8 +56,8 @@
                                     <div class="project">
                                         <div class="photo-wrapper">
                                             <div class="photo">
-                                                <a class="fancybox" href="#{request.contextPath}/img/portfolio/port04.jpg">
-                                                    <img class="img-responsive" src="#{request.contextPath}/img/portfolio/port04.jpg" alt=""/>
+                                                <a class="fancybox" href="/images/#{pt.imagenRuta}">
+                                                    <h:graphicImage class="img-responsive" style="display: inherit" value="/images/#{pt.imagenRuta}" alt=""/>
                                                 </a>
                                             </div>
                                             <div class="overlay"></div>
@@ -104,10 +104,10 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Registro Producto Nuevo</h4>
                     </div>
-                    <h:form>
+                    <h:form  id="cargaArchivo" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="login-wrap">
-                                <h:selectOneMenu value="#{productosView.id_categoria}" class="form-control">
+                                <h:selectOneMenu id="idCat" value="#{productosView.id_categoria}" class="form-control">
                                     <f:selectItems itemLabel="#{cat.nombre}" itemValue="#{cat.idcategorias}" value="#{categoriasView.listaCategorias}" var="cat"></f:selectItems>
                                 </h:selectOneMenu>
                                 <br/>
@@ -120,11 +120,44 @@
                                 <h:inputText  value="#{productosView.productoNuevo.valorCompra}"  class="form-control" html5:placeholder="Valor Compra" html5:autofocus="true"/>
                                 <br/>
                                 <h:inputText  value="#{productosView.productoNuevo.valorVenta}"  class="form-control" html5:placeholder="Valor Venta" html5:autofocus="true"/>
+
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="project-wrapper">
+                                        <div class="project">
+                                            <div class="photo-wrapper">
+                                                <div class="photo">
+                                                    <a class="fancybox" href="#{request.contextPath}/images/#{categoriasView.rutaImg}">
+                                                
+                                                            <h:graphicImage class="img-responsive" style="display: inherit"  id="imgProducto" value="/images/#{categoriasView.rutaImg}" />
+                                                  
+                                                    </a>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6" style="text-align: center;">
+                                    <h:inputFile id="cargaImagen" style="display: none"  onchange="$('#cargaArchivo\\:btnCargaImagen').click();" value="#{categoriasView.filePart}"  >
+
+                                    </h:inputFile>
+                                    <h:commandButton id="btnCargaImagen"  style="display: none" action="#{categoriasView.accion(productosView.id_categoria)}" >
+                                        <f:ajax render="imgProducto"   execute="cargaArchivo:idCat cargaArchivo:cargaImagen"></f:ajax>
+                                    </h:commandButton>
+
+                                    <a onclick="$('#cargaArchivo\\:cargaImagen').click();" class="btn btn-theme"> Image</a>
+                                </div>
+
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                            <h:commandButton action="#{productosView.nuevoProducto()}" class="btn btn-theme" value="Register"/>
+                            <h:commandButton onclick="window.location.reload()" action="#{productosView.nuevoProducto()}" class="btn btn-theme" value="Register"/>
                         </div>
                     </h:form>
                 </div>
