@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:html5="http://xmlns.jcp.org/jsf/passthrough"      
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition >
         <!-- **********************************************************************************************************************************************************
          MAIN CONTENT
@@ -45,49 +46,71 @@
 
 
                 <div class="row">
-                    <c:forEach items="#{categoriasView.listaProductos()}" var="pt">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h:panelGroup id="tabla">
+                        <c:forEach items="#{categoriasView.listaProductos()}" var="pt">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
 
-                            <div class="custom-box">
+                                <div class="custom-box">
 
 
-                                <div class="project-wrapper">
-                                    <div class="project">
-                                        <div class="photo-wrapper">
-                                            <div class="photo">
-                                                <a class="fancybox" href="/images/#{pt.imagenRuta}">
-                                                    <h:graphicImage class="img-responsive" style="display: inherit" value="/images/#{pt.imagenRuta}" alt=""/>
-                                                </a>
+                                    <div class="project-wrapper">
+                                        <div class="project">
+                                            <div class="photo-wrapper">
+                                                <div class="photo">
+                                                    <a class="fancybox" href="/images/#{pt.imagenRuta}">
+                                                        <h:graphicImage class="img-responsive" style="display: inherit" value="/images/#{pt.imagenRuta}" alt=""/>
+                                                    </a>
+                                                </div>
+                                                <div class="overlay"></div>
                                             </div>
-                                            <div class="overlay"></div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="servicetitle">
-                                    <h4>#{pt.nombre}</h4>
-                                    <hr/>
-                                </div>
-                                <div class="icn-main-container" style="height: 128px !important;">
-                                    <span class="icn-container" style="font-size: inherit;">$ #{pt.valorCompra}</span>
-                                </div>
-                                <p>Serial : #{pt.serial}</p>
-                                <ul class="pricing">
-                                    <li>Unidades disponibles : #{pt.cantidad}</li>
-                                </ul>
+                                    <div class="servicetitle">
+                                        <h4>#{pt.nombre}</h4>
+                                        <hr/>
+                                    </div>
+                                    <div class="icn-main-container" style="height: 128px !important;">
+                                        <span class="icn-container" style="font-size: inherit;">$ #{pt.valorCompra}</span>
+                                    </div>
+                                    <p>Serial : #{pt.serial}</p>
+                                    <ul class="pricing">
+                                        <li>Unidades disponibles : #{pt.cantidad}</li>
+                                    </ul>
 
 
+                                </div>
+                                <!-- end custombox -->
                             </div>
-                            <!-- end custombox -->
-                        </div>
-                        <!-- end col-4 -->
-                    </c:forEach>
+                            <!-- end col-4 -->
+                        </c:forEach>
+                    </h:panelGroup>
                 </div>
 
                 <div class="row">
                     <a class="btn btn-success btn-xs" data-toggle="modal" href="#myModal"> New Product</a>
 
+                    <h:form>
+                        <p:growl id="messages" showDetail="true" />   
+
+                        <p:fileUpload 
+                            listener="#{productosView.cargaListaProductos}"
+                            mode="advanced"
+                            dragDropSupport="true"
+                            multiple="true"
+                            update=":tabla messages"
+                            sizeLimit="100000000"
+                            cancelLabel="Cancelar"
+                            fileLimitMessage="Cantidad de Archivos no permitida"
+                            invalidFileMessage="Archivo no valido"
+                            label="Escoger"
+                            uploadLabel="Subir"
+                            fileLimit="3"                                                                                          
+                            allowTypes="/(\.|\/)(xls|xlsx)$/" >
+
+                        </p:fileUpload>
+                    </h:form>
                 </div>
 
 
@@ -130,9 +153,9 @@
                                             <div class="photo-wrapper">
                                                 <div class="photo">
                                                     <a class="fancybox" href="#{request.contextPath}/images/#{categoriasView.rutaImg}">
-                                                
-                                                            <h:graphicImage class="img-responsive" style="display: inherit"  id="imgProducto" value="/images/#{categoriasView.rutaImg}" />
-                                                  
+
+                                                        <h:graphicImage class="img-responsive" style="display: inherit"  id="imgProducto" value="/images/#{categoriasView.rutaImg}" />
+
                                                     </a>
                                                 </div>
                                                 <div class="overlay"></div>
